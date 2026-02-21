@@ -95,7 +95,7 @@ npm run build   # 构建生产版本
 
 ## 部署到 GitHub Pages
 
-**重要：每次推送前都必须构建并更新 docs/ 目录，否则网站不会更新。**
+**重要：每次 commit 前都必须构建并更新 docs/ 目录，commit 的内容必须是网站可直接运行的文件。**
 
 ```bash
 # 1. 构建项目
@@ -104,15 +104,17 @@ npm run build
 # 2. 复制构建结果到 docs 目录
 cp -r dist/* docs/
 
-# 3. 提交更改
-git add docs/
+# 3. 提交更改（包括 docs/ 目录）
+git add .
 git commit -m "更新内容"
 
-# 4. 推送到远程（包含更新的网站内容）
+# 4. 推送到远程
 git push origin main
 ```
 
 或者使用快捷命令：
 ```bash
-npm run build && cp -r dist/* docs/ && git add docs/ && git commit -m "更新内容" && git push origin main
+npm run build && cp -r dist/* docs/ && git add . && git commit -m "更新内容" && git push origin main
 ```
+
+**关键点：docs/ 目录才是 GitHub Pages 部署的内容，源代码本身不会直接部署到网站。**
