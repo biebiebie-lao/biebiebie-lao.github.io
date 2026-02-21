@@ -5,22 +5,22 @@
         <img v-if="showAvatar" :src="avatarSrc" alt="头像" @error="handleAvatarError">
         <span v-else class="avatar-placeholder">👤</span>
       </div>
-      <h1>老鳖</h1>
+      <h1>{{ siteName }}</h1>
       <p class="subtitle">嵌入式 & AI 开发者</p>
 
       <div class="contact-info">
         <h3>联系方式</h3>
         <div class="contact-item">
           <span class="icon">📧</span>
-          <span>your-email@example.com</span>
+          <span>{{ email }}</span>
         </div>
         <div class="contact-item">
           <span class="icon">💬</span>
-          <span>微信号：your-wechat</span>
+          <span>微信号：{{ wechat }}</span>
         </div>
         <div class="contact-item">
           <span class="icon">🐙</span>
-          <a href="https://github.com/lao-biebiebie" target="_blank">GitHub</a>
+          <a :href="githubUrl" target="_blank">GitHub</a>
         </div>
       </div>
     </aside>
@@ -59,10 +59,15 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { getSiteName, getEmail, getWechat, getGithubUrl, getAvatar } from '../services/configService'
 
 const avatarRef = ref(null)
 const showAvatar = ref(false)
-const avatarSrc = ref('/assets/avatar.jpg')
+const avatarSrc = ref(getAvatar())
+const siteName = getSiteName()
+const email = getEmail()
+const wechat = getWechat()
+const githubUrl = getGithubUrl()
 
 onMounted(async () => {
   try {

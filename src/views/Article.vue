@@ -8,12 +8,12 @@
         <span style="margin-left: 1rem;">
           🏷️
           <span
-            v-for="tagId in article.tags"
-            :key="tagId"
+            v-for="tag in article.tags"
+            :key="tag.id"
             class="tag"
-            :style="{ backgroundColor: getTagColor(tagId) }"
+            :style="{ backgroundColor: tag.color }"
           >
-            {{ getTagName(tagId) }}
+            {{ tag.name }}
           </span>
         </span>
       </div>
@@ -29,39 +29,18 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { marked } from 'marked'
-import { articles, blogTags } from '../data'
+import { getArticleDetail, loadArticleContent } from '../services/articleService'
 
 const route = useRoute()
 const article = ref(null)
 const content = ref('')
 
-const getTagName = (tagId) => {
-  const tag = blogTags.find(t => t.id === tagId)
-  return tag ? tag.name : tagId
-}
-
-const getTagColor = (tagId) => {
-  const tag = blogTags.find(t => t.id === tagId)
-  return tag ? tag.color : '#ccc'
-}
-
 const loadArticle = async () => {
   const id = parseInt(route.params.id)
-  article.value = articles.find(a => a.id === id)
+  article.value = getArticleDetail(id)
 
   if (article.value) {
-    try {
-      const response = await fetch(`/articles/${id}.md`)
-      if (response.ok) {
-        const md = await response.text()
-        content.value = marked(md)
-      } else {
-        content.value = '<p>文章内容加载中...</p>'
-      }
-    } catch (e) {
-      content.value = '<p>文章内容加载中...</p>'
-    }
+    content.value = await loadArticleContent(id)
   }
 }
 

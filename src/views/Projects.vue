@@ -27,7 +27,9 @@
 </template>
 
 <script setup>
-import { projects } from '../data'
+import { getProjects } from '../services/projectService'
+
+const projects = getProjects()
 </script>
 
 <style scoped>

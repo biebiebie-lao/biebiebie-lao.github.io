@@ -27,12 +27,12 @@
           <span>📅 {{ article.date }}</span>
           <span class="article-tags">
             <span
-              v-for="tagId in article.tags"
-              :key="tagId"
+              v-for="tag in article.tags"
+              :key="tag.id"
               class="tag"
-              :style="{ backgroundColor: getTagColor(tagId) }"
+              :style="{ backgroundColor: tag.color }"
             >
-              {{ getTagName(tagId) }}
+              {{ tag.name }}
             </span>
           </span>
         </div>
@@ -45,27 +45,17 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { articles, blogTags } from '../data'
+import { filterArticles } from '../services/articleService'
+import { getAllTags } from '../services/tagService'
 
 const router = useRouter()
 const selectedTag = ref('all')
 
+const blogTags = getAllTags()
+
 const filteredArticles = computed(() => {
-  if (selectedTag.value === 'all') {
-    return articles
-  }
-  return articles.filter(a => a.tags.includes(selectedTag.value))
+  return filterArticles(selectedTag.value)
 })
-
-const getTagName = (tagId) => {
-  const tag = blogTags.find(t => t.id === tagId)
-  return tag ? tag.name : tagId
-}
-
-const getTagColor = (tagId) => {
-  const tag = blogTags.find(t => t.id === tagId)
-  return tag ? tag.color : '#ccc'
-}
 
 const goToArticle = (id) => {
   router.push(`/article/${id}`)
