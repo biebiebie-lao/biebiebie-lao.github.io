@@ -66,25 +66,18 @@
     <!-- 项目展示 -->
     <section class="section projects-section">
       <div class="projects-list">
-        <div class="project-card pixel-border">
-          <h3 class="project-name">反应训练灯</h3>
-          <p class="project-desc">[项目描述待补充]</p>
+        <div
+          v-for="project in homeProjects"
+          :key="project.id"
+          class="project-card pixel-border"
+          @click="goToDetail(project.id)"
+        >
+          <h3 class="project-name">{{ project.title }}</h3>
+          <p class="project-desc">{{ project.description }}</p>
           <div class="project-tech">
-            <span class="tech-tag">STM32</span>
-          </div>
-        </div>
-        <div class="project-card pixel-border">
-          <h3 class="project-name">PasswordBook</h3>
-          <p class="project-desc">[项目描述待补充]</p>
-          <div class="project-tech">
-            <span class="tech-tag">C++</span>
-          </div>
-        </div>
-        <div class="project-card pixel-border">
-          <h3 class="project-name">OneRec</h3>
-          <p class="project-desc">[项目描述待补充]</p>
-          <div class="project-tech">
-            <span class="tech-tag">ESP32</span>
+            <span v-for="tech in project.tech" :key="tech" class="tech-tag">
+              {{ tech }}
+            </span>
           </div>
         </div>
       </div>
@@ -94,6 +87,19 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { getProjects } from '../services/projectService'
+
+const router = useRouter()
+const projects = getProjects()
+
+// 首页只显示前3个项目
+const homeProjects = computed(() => projects.slice(0, 3))
+
+const goToDetail = (id) => {
+  router.push(`/project/${id}`)
+}
 </script>
 
 <style scoped>
@@ -234,6 +240,12 @@
 .project-card {
   background: var(--bg-card);
   padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.project-card:hover {
+  border-color: var(--accent);
 }
 
 .project-name {

@@ -5,7 +5,12 @@
       展示嵌入式与人工智能相关的个人项目
     </p>
     <div class="projects-grid">
-      <div v-for="project in projects" :key="project.id" class="project-card">
+      <div
+        v-for="project in projects"
+        :key="project.id"
+        class="project-card"
+        @click="goToDetail(project.id)"
+      >
         <h2>{{ project.title }}</h2>
         <p>{{ project.description }}</p>
         <div class="tech-tags">
@@ -13,7 +18,7 @@
             {{ tech }}
           </span>
         </div>
-        <div class="project-links">
+        <div class="project-links" @click.stop>
           <a :href="project.github" target="_blank" class="project-link">
             GitHub
           </a>
@@ -27,9 +32,15 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
 import { getProjects } from '../services/projectService'
 
+const router = useRouter()
 const projects = getProjects()
+
+const goToDetail = (id) => {
+  router.push(`/project/${id}`)
+}
 </script>
 
 <style scoped>

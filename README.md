@@ -21,7 +21,7 @@
 │   ├── views/           # 页面组件
 │   │   ├── Home.vue     # 首页
 │   │   ├── Blog.vue     # 博客列表
-│   │   ├── Article.vue  # 文章详情
+│   │   ├── Article.vue  # 文章/项目详情
 │   │   ├── Projects.vue # 项目展示
 │   │   └── About.vue    # 关于页面
 │   ├── components/      # 公共组件
@@ -43,6 +43,10 @@
 │   └── style.css
 ├── public/
 │   ├── articles/        # Markdown 文章
+│   │   ├── 1.md
+│   │   ├── 2.md
+│   │   └── ...
+│   ├── projects/        # Markdown 项目详情
 │   │   ├── 1.md
 │   │   ├── 2.md
 │   │   └── ...
@@ -105,7 +109,20 @@ About 页面头像放在 `public/assets/me.jpg`
 
 ### 添加新项目
 
-- 在 `src/data/projects.js` 的 `projects` 数组添加条目
+1. 在 `src/data/projects.js` 的 `projects` 数组添加条目
+2. 在 `public/projects/` 目录创建对应的 `.md` 文件（如 `7.md`）
+
+项目数据字段说明：
+```js
+{
+  id: 7,
+  title: '项目名称',
+  description: '项目简述',
+  tech: ['技术1', '技术2'],  // 技术栈标签
+  github: 'https://github.com/xxx',  // GitHub 链接
+  demo: 'https://xxx'  // 在线演示链接（可选）
+}
+```
 
 ### 修改标签
 

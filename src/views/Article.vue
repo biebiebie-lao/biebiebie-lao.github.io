@@ -1,21 +1,33 @@
 <template>
   <article class="article-detail">
-    <router-link to="/blog" class="back-link">← 返回博客列表</router-link>
+    <router-link :to="backLink" class="back-link">{{ backText }}</router-link>
     <div v-if="article">
       <h1>{{ article.title }}</h1>
       <div class="meta">
-        <span>📅 {{ article.date }}</span>
-        <span style="margin-left: 1rem;">
-          🏷️
+        <template v-if="isProject">
+          <span>🔧</span>
           <span
-            v-for="tag in article.tags"
-            :key="tag.id"
+            v-for="tech in article.tech"
+            :key="tech"
             class="tag"
-            :style="{ backgroundColor: tag.color }"
           >
-            {{ tag.name }}
+            {{ tech }}
           </span>
-        </span>
+        </template>
+        <template v-else>
+          <span>📅 {{ article.date }}</span>
+          <span style="margin-left: 1rem;">
+            🏷️
+            <span
+              v-for="tag in article.tags"
+              :key="tag.id"
+              class="tag"
+              :style="{ backgroundColor: tag.color }"
+            >
+              {{ tag.name }}
+            </span>
+          </span>
+        </template>
       </div>
       <div class="content" v-html="content"></div>
     </div>
@@ -27,25 +39,65 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, onMounted, watch, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { getArticleDetail, loadArticleContent } from '../services/articleService'
+import { getProjectDetail, loadProjectContent } from '../services/projectService'
 
 const route = useRoute()
+const router = useRouter()
 const article = ref(null)
 const content = ref('')
 
-const loadArticle = async () => {
-  const id = parseInt(route.params.id)
-  article.value = getArticleDetail(id)
+// 判断是文章还是项目
+const isProject = computed(() => route.path.startsWith('/project'))
 
-  if (article.value) {
-    content.value = await loadArticleContent(id)
+const loadContent = async () => {
+  const id = parseInt(route.params.id)
+
+  if (isProject.value) {
+    // 项目详情
+    article.value = getProjectDetail(id)
+    if (article.value) {
+      content.value = await loadProjectContent(id)
+    }
+  } else {
+    // 文章详情
+    article.value = getArticleDetail(id)
+    if (article.value) {
+      content.value = await loadArticleContent(id)
+    }
   }
 }
 
-onMounted(loadArticle)
-watch(() => route.params.id, loadArticle)
+// 返回链接 - 根据上一页判断
+const backLink = computed(() => {
+  if (!isProject.value) {
+    return '/blog'
+  }
+  // 获取上一页路径
+  const from = router.options.history.state.back
+  // 如果上一页是首页('/', '' 或 undefined)，返回首页
+  if (from === '/' || from === '' || from === undefined) {
+    return '/'
+  }
+  return '/projects'
+})
+
+const backText = computed(() => {
+  if (!isProject.value) {
+    return '← 返回博客列表'
+  }
+  const from = router.options.history.state.back
+  if (from === '/' || from === '' || from === undefined) {
+    return '← 返回首页'
+  }
+  return '← 返回项目列表'
+})
+
+onMounted(loadContent)
+watch(() => route.params.id, loadContent)
+watch(() => route.path, loadContent)
 </script>
 
 <style scoped>

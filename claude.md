@@ -23,7 +23,7 @@
 │   ├── views/           # 页面组件
 │   │   ├── Home.vue     # 首页
 │   │   ├── Blog.vue     # 博客列表
-│   │   ├── Article.vue  # 文章详情
+│   │   ├── Article.vue  # 文章/项目详情
 │   │   ├── Projects.vue # 项目展示
 │   │   └── About.vue    # 关于页面
 │   ├── components/      # 公共组件
@@ -45,6 +45,10 @@
 │   └── style.css
 ├── public/
 │   ├── articles/        # Markdown 文章
+│   │   ├── 1.md
+│   │   ├── 2.md
+│   │   └── ...
+│   ├── projects/        # Markdown 项目详情
 │   │   ├── 1.md
 │   │   ├── 2.md
 │   │   └── ...
@@ -79,6 +83,7 @@
 - **标签配置**: `src/data/tags.js` → `tags` 数组
 - **站点配置**: `src/data/config.js` → `siteConfig` 对象
 - **Markdown 文章**: `public/articles/` 目录
+- **Markdown 项目详情**: `public/projects/` 目录
 
 ## 开发命令
 

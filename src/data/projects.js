@@ -23,5 +23,29 @@ export const projects = [
     tech: ['ESP32', 'MQTT', 'Node-RED'],
     github: 'https://github.com/lao-biebiebie',
     demo: null
+  },
+  {
+    id: 4,
+    title: '反应训练灯',
+    description: '用于训练反应速度的灯光训练设备',
+    tech: ['STM32', 'LED'],
+    github: 'https://github.com/lao-biebiebie',
+    demo: null
+  },
+  {
+    id: 5,
+    title: 'PasswordBook',
+    description: '密码管理工具',
+    tech: ['C++', 'Qt'],
+    github: 'https://github.com/lao-biebiebie',
+    demo: null
+  },
+  {
+    id: 6,
+    title: 'OneRec',
+    description: '单记录录设备',
+    tech: ['ESP32', 'Audio'],
+    github: 'https://github.com/lao-biebiebie',
+    demo: null
   }
 ]
