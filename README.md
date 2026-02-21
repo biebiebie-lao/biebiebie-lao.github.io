@@ -1,5 +1,29 @@
-# Vue 3 + Vite
+# 老鳖的个人网站
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+基于 Vue 3 + Vite 的个人技术博客，像素科技风格。
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+- **GitHub**: lao-biebiebie
+- **网站名称**: 老鳖的个人网站
+- **内容定位**: 嵌入式 + 人工智能
+
+## 技术栈
+
+- Vue 3 + Vite
+- Vue Router
+- 原生 CSS（像素风格）
+- Markdown 文章
+
+## 开发
+
+```bash
+npm install
+npm run dev
+```
+
+## 部署
+
+```bash
+npm run build
+```
+
+构建产物在 `dist` 目录。
