@@ -1,0 +1,74 @@
+/* ===== 像素风格主题 ===== */
+:root {
+    --bg-primary: #2d2a24;
+    --bg-secondary: #3d3a34;
+    --bg-card: #4a4740;
+    --text-primary: #f5f0e1;
+    --text-secondary: #c4c0b5;
+    --accent: #e6c84b;
+    --accent-hover: #f5d86a;
+    --pixel-green: #7cb342;
+    --border-color: #5a574d;
+    --shadow: rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+#app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: var(--accent-hover);
+}
+
+/* ===== 像素风格边框 ===== */
+.pixel-border {
+    border: 4px solid var(--text-primary);
+    box-shadow:
+        4px 4px 0 var(--shadow),
+        -4px -4px 0 var(--shadow),
+        4px -4px 0 var(--shadow),
+        -4px 4px 0 var(--shadow);
+}
+
+/* ===== 导航栏 ===== */
+header {
+    background-color: var(--bg-secondary);
+    border-bottom: 4px solid var(--accent);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* ===== 主要内容区 ===== */
+main {
+    flex: 1;
+}
+
+/* ===== 响应式设计 ===== */
+@media (max-width: 768px) {
+    main {
+        padding: 1rem;
+    }
+}
