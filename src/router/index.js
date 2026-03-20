@@ -1,17 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import Blog from '../views/Blog.vue'
-import Article from '../views/Article.vue'
-import Projects from '../views/Projects.vue'
-import About from '../views/About.vue'
 
 const routes = [
-  { path: '/', name: 'Home', component: Home },
-  { path: '/blog', name: 'Blog', component: Blog },
-  { path: '/article/:id', name: 'Article', component: Article },
-  { path: '/projects', name: 'Projects', component: Projects },
-  { path: '/project/:id', name: 'ProjectDetail', component: Article },
-  { path: '/about', name: 'About', component: About }
+  { path: '/', name: 'Home', component: () => import('../views/Home.vue') },
+  { path: '/blog', name: 'Blog', component: () => import('../views/Blog.vue') },
+  { path: '/article/:id', name: 'Article', component: () => import('../views/Article.vue') },
+  { path: '/projects', name: 'Projects', component: () => import('../views/Projects.vue') },
+  { path: '/project/:id', name: 'ProjectDetail', component: () => import('../views/ProjectDetail.vue') },
+  { path: '/about', name: 'About', component: () => import('../views/About.vue') },
+  { path: '/:pathMatch(.*)', name: 'NotFound', component: () => import('../views/NotFound.vue') }
 ]
 
 const router = createRouter({

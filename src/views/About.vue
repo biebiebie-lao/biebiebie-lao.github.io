@@ -1,5 +1,7 @@
 <template>
   <div class="about-container">
+    <div v-if="loading" class="loading">加载中...</div>
+    <template v-else>
     <aside class="profile-section">
       <div class="profile-image" ref="avatarRef">
         <img v-if="showAvatar" :src="avatarSrc" alt="头像" @error="handleAvatarError">
@@ -20,7 +22,7 @@
         </div>
         <div class="contact-item">
           <span class="icon">🐙</span>
-          <a :href="githubUrl" target="_blank">GitHub</a>
+          <a :href="githubUrl" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
       </div>
     </aside>
@@ -54,20 +56,21 @@
         开始学习嵌入式和 AI 技术已经有一段时间了，期间完成了多个小项目，也踩了不少坑。未来会继续深耕这两个领域，努力做出更有价值的项目。
       </p>
     </div>
+    </template>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getSiteName, getEmail, getWechat, getGithubUrl, getAvatar } from '../services/configService'
+import { useConfig } from '../services/configService'
+
+const { avatar, name: siteName, email, wechat, github } = useConfig()
 
 const avatarRef = ref(null)
 const showAvatar = ref(false)
-const avatarSrc = ref(getAvatar())
-const siteName = getSiteName()
-const email = getEmail()
-const wechat = getWechat()
-const githubUrl = getGithubUrl()
+const avatarSrc = ref(avatar)
+const githubUrl = ref(github)
+const loading = ref(true)
 
 onMounted(async () => {
   try {
@@ -77,6 +80,8 @@ onMounted(async () => {
     }
   } catch (e) {
     showAvatar.value = false
+  } finally {
+    loading.value = false
   }
 })
 
@@ -90,6 +95,12 @@ const handleAvatarError = () => {
   display: grid;
   grid-template-columns: 300px 1fr;
   gap: 3rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-secondary);
 }
 
 .profile-section {

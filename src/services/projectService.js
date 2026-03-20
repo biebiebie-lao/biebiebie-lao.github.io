@@ -11,14 +11,10 @@ export const getProjectDetail = (id) => getProjectById(id)
 
 // 加载项目 Markdown 内容
 export const loadProjectContent = async (id) => {
-  try {
-    const response = await fetch(`/projects/${id}.md`)
-    if (!response.ok) {
-      throw new Error('Project not found')
-    }
-    const md = await response.text()
-    return marked(md)
-  } catch (e) {
-    return '<p>项目详情加载失败</p>'
+  const response = await fetch(`/projects/${id}.md`)
+  if (!response.ok) {
+    throw new Error('Project not found')
   }
+  const md = await response.text()
+  return marked(md)
 }

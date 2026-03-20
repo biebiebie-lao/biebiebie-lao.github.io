@@ -38,14 +38,10 @@ export const getArticleDetail = (id) => {
 
 // 加载 Markdown 内容
 export const loadArticleContent = async (id) => {
-  try {
-    const response = await fetch(`/articles/${id}.md`)
-    if (!response.ok) {
-      throw new Error('Article not found')
-    }
-    const md = await response.text()
-    return marked(md)
-  } catch (e) {
-    return '<p>文章内容加载失败</p>'
+  const response = await fetch(`/articles/${id}.md`)
+  if (!response.ok) {
+    throw new Error('Article not found')
   }
+  const md = await response.text()
+  return marked(md)
 }

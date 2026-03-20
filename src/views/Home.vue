@@ -267,12 +267,4 @@ const goToDetail = (id) => {
   margin-bottom: 0.5rem;
 }
 
-.tech-tag {
-  background: var(--bg-secondary);
-  padding: 0.2rem 0.5rem;
-  font-size: 0.7rem;
-  border: 2px solid var(--pixel-green);
-  color: var(--pixel-green);
-}
-
 </style>

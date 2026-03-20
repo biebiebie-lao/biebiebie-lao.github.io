@@ -19,10 +19,10 @@
           </span>
         </div>
         <div class="project-links" @click.stop>
-          <a :href="project.github" target="_blank" class="project-link">
+          <a :href="project.github" target="_blank" rel="noopener noreferrer" class="project-link">
             GitHub
           </a>
-          <a v-if="project.demo" :href="project.demo" target="_blank" class="project-link">
+          <a v-if="project.demo" :href="project.demo" target="_blank" rel="noopener noreferrer" class="project-link">
             在线演示
           </a>
         </div>
@@ -86,14 +86,6 @@ const goToDetail = (id) => {
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 1rem;
-}
-
-.tech-tag {
-  background: var(--bg-secondary);
-  color: var(--accent);
-  padding: 0.2rem 0.6rem;
-  font-size: 0.8rem;
-  border: 2px solid var(--accent);
 }
 
 .project-links {

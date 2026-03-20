@@ -6,9 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "clean": "rm -rf dist",
+    "build:clean": "npm run clean && npm run build",
+    "build:deploy": "npm run build && cp -r dist/* docs/"
   },
   "dependencies": {
+    "dompurify": "^3.3.3",
     "marked": "^17.0.3",
     "vue": "^3.5.25",
     "vue-router": "^4.6.4"

@@ -1,6 +1,6 @@
 <template>
   <article class="article-detail">
-    <router-link :to="backLink" class="back-link">{{ backText }}</router-link>
+    <router-link to="/projects" class="back-link">← 返回项目列表</router-link>
     <div v-if="loading" class="loading">加载中...</div>
     <div v-else-if="error" class="error">
       <p>{{ error }}</p>
@@ -9,56 +9,35 @@
     <div v-else-if="article">
       <h1>{{ article.title }}</h1>
       <div class="meta">
-        <template v-if="isProject">
-          <span>🔧</span>
-          <span
-            v-for="tech in article.tech"
-            :key="tech"
-            class="tag"
-          >
-            {{ tech }}
-          </span>
-        </template>
-        <template v-else>
-          <span>📅 {{ article.date }}</span>
-          <span style="margin-left: 1rem;">
-            🏷️
-            <span
-              v-for="tag in article.tags"
-              :key="tag.id"
-              class="tag"
-              :style="{ backgroundColor: tag.color }"
-            >
-              {{ tag.name }}
-            </span>
-          </span>
-        </template>
+        <span>🔧</span>
+        <span
+          v-for="tech in article.tech"
+          :key="tech"
+          class="tag"
+        >
+          {{ tech }}
+        </span>
       </div>
       <div class="content" v-html="sanitizedContent"></div>
     </div>
     <div v-else>
-      <h1>文章未找到</h1>
-      <p>抱歉，您要查看的文章不存在。</p>
+      <h1>项目未找到</h1>
+      <p>抱歉，您要查看的项目不存在。</p>
     </div>
   </article>
 </template>
 
 <script setup>
 import { ref, onMounted, watch, computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { getArticleDetail, loadArticleContent } from '../services/articleService'
+import { useRoute } from 'vue-router'
 import { getProjectDetail, loadProjectContent } from '../services/projectService'
 import DOMPurify from 'dompurify'
 
 const route = useRoute()
-const router = useRouter()
 const article = ref(null)
 const content = ref('')
 const loading = ref(true)
 const error = ref(null)
-
-// 判断是文章还是项目
-const isProject = computed(() => route.path.startsWith('/project'))
 
 // 消毒后的内容，防止 XSS
 const sanitizedContent = computed(() => {
@@ -70,58 +49,20 @@ const loadContent = async () => {
   error.value = null
   const id = parseInt(route.params.id)
 
-  if (isProject.value) {
-    // 项目详情
-    article.value = getProjectDetail(id)
-    if (article.value) {
-      try {
-        content.value = await loadProjectContent(id)
-      } catch (e) {
-        error.value = e.message
-      }
-    }
-  } else {
-    // 文章详情
-    article.value = getArticleDetail(id)
-    if (article.value) {
-      try {
-        content.value = await loadArticleContent(id)
-      } catch (e) {
-        error.value = e.message
-      }
+  // 项目详情
+  article.value = getProjectDetail(id)
+  if (article.value) {
+    try {
+      content.value = await loadProjectContent(id)
+    } catch (e) {
+      error.value = e.message
     }
   }
   loading.value = false
 }
 
-// 返回链接 - 根据上一页判断
-const backLink = computed(() => {
-  if (!isProject.value) {
-    return '/blog'
-  }
-  // 获取上一页路径
-  const from = router.options.history.state.back
-  // 如果上一页是首页('/', '' 或 undefined)，返回首页
-  if (from === '/' || from === '' || from === undefined) {
-    return '/'
-  }
-  return '/projects'
-})
-
-const backText = computed(() => {
-  if (!isProject.value) {
-    return '← 返回博客列表'
-  }
-  const from = router.options.history.state.back
-  if (from === '/' || from === '' || from === undefined) {
-    return '← 返回首页'
-  }
-  return '← 返回项目列表'
-})
-
 onMounted(loadContent)
 watch(() => route.params.id, loadContent)
-watch(() => route.path, loadContent)
 </script>
 
 <style scoped>
