@@ -2,30 +2,23 @@
 export const articles = [
   {
     id: 1,
-    title: 'ESP32 环境搭建与第一个程序',
-    date: '2025-01-15',
-    tags: ['embedded'],
-    excerpt: '记录 ESP32 开发环境配置过程，以及如何编写第一个 Blink 程序...'
+    title: 'LLM 训练范式全解析：从预训练到 RLHF',
+    date: '2025-03-21',
+    tags: ['ai'],
+    excerpt: '系统梳理 LLM 的三大核心训练阶段：预训练、SFT、RLHF，以及 DPO 等新兴范式...'
   },
   {
     id: 2,
-    title: '强化学习基础概念入门',
-    date: '2025-01-20',
+    title: '强化学习入门：从原理到实践',
+    date: '2025-03-21',
     tags: ['ai'],
-    excerpt: '介绍强化学习的基本概念，包括 Agent、Environment、State、Action 等核心要素...'
+    excerpt: '介绍强化学习的基本概念，包括 Agent、Environment、State、Action、Reward 等核心要素...'
   },
   {
     id: 3,
-    title: 'ESP32 WiFi 连接与网络通信',
-    date: '2025-02-01',
+    title: 'ESP32：从入门到项目落地',
+    date: '2025-03-21',
     tags: ['embedded'],
-    excerpt: '讲解 ESP32 如何连接 WiFi，以及实现简单的 HTTP 请求...'
-  },
-  {
-    id: 4,
-    title: 'Q-Learning 算法实现',
-    date: '2025-02-10',
-    tags: ['ai'],
-    excerpt: '手把手实现经典的 Q-Learning 算法，并用 Python 编写代码示例...'
+    excerpt: '全面介绍 ESP32 的核心架构、典型应用场景以及主流开发环境对比...'
   }
 ]
