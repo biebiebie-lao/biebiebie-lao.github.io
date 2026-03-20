@@ -14,7 +14,10 @@
       "Bash(git push:*)",
       "Bash(git pull:*)",
       "Bash(gh:*)",
-      "Bash(timeout:*)"
+      "Bash(timeout:*)",
+      "Bash(curl -s http://localhost:4174/assets/index-KWDCYFhd.js | head -20)",
+      "Bash(head -c 200 /home/lao_bie/myProject/biebiebie-lao.github.io/dist/assets/vendor-CBIsKeph.js)",
+      "Bash(cp -r /home/lao_bie/myProject/biebiebie-lao.github.io/dist/* /home/lao_bie/myProject/biebiebie-lao.github.io/docs/)"
     ]
   }
 }
