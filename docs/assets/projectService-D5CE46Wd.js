@@ -1,1 +1,0 @@
-import{g as n}from"./markdown-i_gIkIP3.js";const e=[{id:4,title:"反应训练灯",description:"用于训练反应速度的灯光训练设备",tech:["STM32","LED"],github:"https://github.com/lao-biebiebie",demo:null}],i=()=>e,r=t=>e.find(o=>o.id===t),a=t=>r(t),d=async t=>{const o=await fetch(`/projects/${t}.md`);if(!o.ok)throw new Error("Project not found");const c=await o.text();return n(c)};export{a,i as g,d as l};
