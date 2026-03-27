@@ -22,7 +22,8 @@
       "Bash(ls -la /home/lao_bie/myProject/biebiebie-lao.github.io/*.html /home/lao_bie/myProject/biebiebie-lao.github.io/assets/ 2>/dev/null | head -30)",
       "Bash(git clone https://gitee.com/lao_bie/now-reaction.git /tmp/now-reaction 2>&1)",
       "Bash(git clone https://gitee.com/lao_bie/reaction_-now.git /tmp/reaction-now 2>&1)",
-      "Bash(cp -r dist/* . && git add . && git commit -m \"feat: 更新反应训练灯项目文档，使用ESP32-C6架构\" 2>&1)"
+      "Bash(cp -r dist/* . && git add . && git commit -m \"feat: 更新反应训练灯项目文档，使用ESP32-C6架构\" 2>&1)",
+      "Bash(git remote:*)"
     ]
   }
 }
