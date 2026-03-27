@@ -1,89 +1,107 @@
-/* ===== 像素风格主题 ===== */
+/* ===== Claude Website Aesthetic ===== */
 :root {
-    --bg-primary: #2d2a24;
-    --bg-secondary: #3d3a34;
-    --bg-card: #4a4740;
-    --text-primary: #f5f0e1;
-    --text-secondary: #c4c0b5;
-    --accent: #e6c84b;
-    --accent-hover: #f5d86a;
-    --pixel-green: #7cb342;
-    --border-color: #5a574d;
-    --shadow: rgba(0, 0, 0, 0.3);
+  /* Colors - Warm cream palette */
+  --bg-primary: #e8e6dc;
+  --bg-secondary: #f5f3eb;
+  --text-primary: #141413;
+  --text-secondary: #5c5a55;
+  --text-muted: #8a8880;
+  --accent: #d97757;
+  --accent-hover: #c4634a;
+  --accent-yellow: #eda100;
+  --border-color: #d4d2c9;
+
+  /* Typography */
+  --font-serif: 'Source Serif 4', 'Georgia', 'Times New Roman', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  --spacing-4xl: 6rem;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Courier New', monospace;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    line-height: 1.6;
-    min-height: 100vh;
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.7;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #app {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
 }
 
 a {
-    color: var(--accent);
-    text-decoration: none;
-    transition: color 0.2s;
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
 }
 
 a:hover {
-    color: var(--accent-hover);
+  color: var(--accent-hover);
 }
 
-/* ===== 像素风格边框 ===== */
-.pixel-border {
-    border: 4px solid var(--text-primary);
-    box-shadow:
-        4px 4px 0 var(--shadow),
-        -4px -4px 0 var(--shadow),
-        4px -4px 0 var(--shadow),
-        -4px 4px 0 var(--shadow);
+::selection {
+  background: var(--accent);
+  color: var(--bg-primary);
 }
 
-/* ===== 导航栏 ===== */
-header {
-    background-color: var(--bg-secondary);
-    border-bottom: 4px solid var(--accent);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+/* ===== Animations ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* ===== 主要内容区 ===== */
-main {
-    flex: 1;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* ===== 响应式设计 ===== */
-@media (max-width: 768px) {
-    main {
-        padding: 1rem;
-    }
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
 }
 
-/* ===== 无障碍支持 ===== */
-*:focus-visible {
-    outline: 3px solid var(--accent);
-    outline-offset: 2px;
+@keyframes blink {
+  50% { border-color: transparent; }
 }
 
-/* ===== 技术标签 ===== */
-.tech-tag {
-    background: var(--bg-secondary);
-    color: var(--accent);
-    padding: 0.2rem 0.6rem;
-    font-size: 0.8rem;
-    border: 2px solid var(--accent);
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
