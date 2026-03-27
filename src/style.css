@@ -1,89 +1,79 @@
-/* ===== 像素风格主题 ===== */
+/* ===== Claude-style Dark Theme ===== */
 :root {
-    --bg-primary: #2d2a24;
-    --bg-secondary: #3d3a34;
-    --bg-card: #4a4740;
-    --text-primary: #f5f0e1;
-    --text-secondary: #c4c0b5;
-    --accent: #e6c84b;
-    --accent-hover: #f5d86a;
-    --pixel-green: #7cb342;
-    --border-color: #5a574d;
-    --shadow: rgba(0, 0, 0, 0.3);
+  /* Colors */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #141414;
+  --bg-card: #1a1a1a;
+  --bg-hover: #242424;
+  --text-primary: #ededed;
+  --text-secondary: #a0a0a0;
+  --text-muted: #6b6b6b;
+  --accent: #7aa2c4;
+  --accent-hover: #9bb8d4;
+  --border-color: #2a2a2a;
+  --border-subtle: #1f1f1f;
+
+  /* Typography */
+  --font-serif: 'Georgia', 'Times New Roman', serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.4s ease;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Courier New', monospace;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    line-height: 1.6;
-    min-height: 100vh;
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.7;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #app {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
 }
 
 a {
-    color: var(--accent);
-    text-decoration: none;
-    transition: color 0.2s;
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
 }
 
 a:hover {
-    color: var(--accent-hover);
+  color: var(--accent-hover);
 }
 
-/* ===== 像素风格边框 ===== */
-.pixel-border {
-    border: 4px solid var(--text-primary);
-    box-shadow:
-        4px 4px 0 var(--shadow),
-        -4px -4px 0 var(--shadow),
-        4px -4px 0 var(--shadow),
-        -4px 4px 0 var(--shadow);
-}
-
-/* ===== 导航栏 ===== */
-header {
-    background-color: var(--bg-secondary);
-    border-bottom: 4px solid var(--accent);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-/* ===== 主要内容区 ===== */
-main {
-    flex: 1;
-}
-
-/* ===== 响应式设计 ===== */
-@media (max-width: 768px) {
-    main {
-        padding: 1rem;
-    }
-}
-
-/* ===== 无障碍支持 ===== */
+/* ===== Focus Styles ===== */
 *:focus-visible {
-    outline: 3px solid var(--accent);
-    outline-offset: 2px;
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
-/* ===== 技术标签 ===== */
-.tech-tag {
-    background: var(--bg-secondary);
-    color: var(--accent);
-    padding: 0.2rem 0.6rem;
-    font-size: 0.8rem;
-    border: 2px solid var(--accent);
+/* ===== Selection ===== */
+::selection {
+  background: var(--accent);
+  color: var(--bg-primary);
 }
